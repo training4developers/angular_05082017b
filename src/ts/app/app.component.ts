@@ -2,9 +2,8 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: "main",
-    template: `{{message}}`,
+    template: `
+        <color-tool></color-tool>
+    `,
 })
-export class AppComponent {
-
-    public message: string = "Hello World!";
-}
+export class AppComponent { }

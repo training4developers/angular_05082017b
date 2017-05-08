@@ -1,16 +1,11 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-
+import { ColorToolModule } from "./color-tool/color-tool.module";
 import { AppComponent } from "./app.component";
 
-import "bootstrap-loader";
-import "../../scss/styles.scss";
-
 @NgModule({
-    imports: [ BrowserModule, FormsModule, NgbModule.forRoot() ],
+    imports: [ BrowserModule, ColorToolModule ],
     declarations: [ AppComponent ],
     bootstrap: [ AppComponent ],
 })
