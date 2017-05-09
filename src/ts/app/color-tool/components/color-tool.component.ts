@@ -9,7 +9,7 @@ import { Color } from "../models/color";
             <h1>Color Tool</h1>
         </header>
         <ul>
-            <li *ngFor="let color of colors">{{color.name}}</li>
+            <li *ngFor="let color of colors">{{color.name | capitalize}}</li>
         </ul>
         <form novalidate>
             <div>
