@@ -1,4 +1,5 @@
-import { Component, DoCheck } from "@angular/core";
+import { Component } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 
 import { Color } from "../models/color";
 
@@ -9,30 +10,23 @@ import { Color } from "../models/color";
             <h1>Color Tool</h1>
         </header>
         <ul>
-            <li *ngFor="let color of colors">{{color.name | capitalize:34}}</li>
+            <li *ngFor="let color of colors">{{color.name}}</li>
         </ul>
-        <form novalidate>
+        <form novalidate [formGroup]="newColorForm">
             <div>
                 <label for="new-color-input">New Color:</label>
                 <input type="text" id="new-color-input"
-                    name="newColorInput" [(ngModel)]="newColor"
-                    required #newColorInputRef="ngModel">
-                <span>*</span>
-                <span>
-                    Please enter a new color before trying to add.
-                </span>
+                    formControlName="newColorInput">
             </div>
             <button type="button" (click)="addColor()">Add Color</button>
         </form>
     `,
-    styles: [
-        "input.ng-invalid.ng-touched { border: 1px solid red; }",
-        "input + span { float: left; }",
-        "input ~ span { display:none; }",
-        "input.ng-invalid.ng-touched ~ span { display:inline; }",
-    ],
 })
-export class ColorToolComponent implements DoCheck {
+export class ColorToolComponent {
+
+    public newColorForm = new FormGroup({
+        newColorInput: new FormControl(""),
+    });
 
     public newColor = "";
 
@@ -45,20 +39,16 @@ export class ColorToolComponent implements DoCheck {
         { id: 6, name: "blue" },
     ];
 
-    public ngDoCheck() {
-        console.log("change detection cycle executed");
-    }
-
     public addColor() {
 
         const nextId = this.colors.reduce(
             (maxId, nextColor) => Math.max(maxId, nextColor.id), 0 ) + 1;
 
-        console.log(nextId);
+        console.log(this.newColorForm.value);
 
         this.colors = this.colors.concat({
             id: nextId,
-            name: this.newColor,
+            name: this.newColorForm.value.newColorInput,
         });
 
         this.newColor = "";
