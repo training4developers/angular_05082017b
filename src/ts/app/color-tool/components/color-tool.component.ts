@@ -7,26 +7,15 @@ import { Color } from "../models/color";
     selector: "color-tool",
     template: `
         <tool-header [header]="toolHeader"></tool-header>
-        <ul>
-            <li *ngFor="let color of colors | slice:1">{{color.name | capitalize}}</li>
-        </ul>
-        <form novalidate [formGroup]="newColorForm">
-            <div>
-                <label for="new-color-input">New Color:</label>
-                <input type="text" id="new-color-input"
-                    formControlName="newColorInput">
-            </div>
-            <button type="button" (click)="addColor()">Add Color</button>
-        </form>
+        <unordered-list [listItems]="colorNames"></unordered-list>
+        <color-form (onSaveColor)="addColor($event)"></color-form>
     `,
 })
 export class ColorToolComponent {
 
     public toolHeader = "Color Tool!";
 
-    public newColorForm = new FormGroup({
-        newColorInput: new FormControl(""),
-    });
+
 
     public newColor = "";
 
@@ -39,20 +28,19 @@ export class ColorToolComponent {
         { id: 6, name: "blue" },
     ];
 
-    public addColor() {
+    public get colorNames() {
+        return this.colors.map((color) => color.name);
+    }
+
+    public addColor(newColor: string) {
 
         const nextId = this.colors.reduce(
             (maxId, nextColor) => Math.max(maxId, nextColor.id), 0 ) + 1;
 
-        console.log(this.newColorForm.value);
-
         this.colors = this.colors.concat({
             id: nextId,
-            name: this.newColorForm.value.newColorInput,
+            name: newColor,
         });
-
-        this.newColor = "";
-
     }
 
 }
