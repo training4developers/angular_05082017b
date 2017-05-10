@@ -6,9 +6,7 @@ import { Color } from "../models/color";
 @Component({
     selector: "color-tool",
     template: `
-        <header>
-            <h1>Color Tool</h1>
-        </header>
+        <tool-header [header]="toolHeader"></tool-header>
         <ul>
             <li *ngFor="let color of colors">{{color.name}}</li>
         </ul>
@@ -23,6 +21,8 @@ import { Color } from "../models/color";
     `,
 })
 export class ColorToolComponent {
+
+    public toolHeader = "Color Tool!";
 
     public newColorForm = new FormGroup({
         newColorInput: new FormControl(""),
