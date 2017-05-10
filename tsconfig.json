@@ -17,6 +17,9 @@
             "dom"
         ]
 	},
+    "files": [
+        "src/ts/app/app.module.ts"
+    ],
 	"atom": {
 		"rewriteTsconfig": false
 	}

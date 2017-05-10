@@ -8,7 +8,7 @@ import { Color } from "../models/color";
     template: `
         <tool-header [header]="toolHeader"></tool-header>
         <ul>
-            <li *ngFor="let color of colors">{{color.name}}</li>
+            <li *ngFor="let color of colors | slice:1">{{color.name | capitalize}}</li>
         </ul>
         <form novalidate [formGroup]="newColorForm">
             <div>
