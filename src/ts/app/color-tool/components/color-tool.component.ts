@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 
 import { Color } from "../models/color";
+import { ColorsService } from "../services/colors.service";
 
 @Component({
     selector: "color-tool",
@@ -15,32 +16,25 @@ export class ColorToolComponent {
 
     public toolHeader = "Color Tool!";
 
+    // private colorsSvc: ColorsService;
 
+    // constructor(colorsSvc: ColorsService) {
+    //     this.colorsSvc = colorsSvc;
+    // }
 
-    public newColor = "";
+    public colors: Color[] = this.colorsSvc.getAll();
 
-    public colors: Color[] = [
-        { id: 1, name: "red" },
-        { id: 2, name: "gold" },
-        { id: 3, name: "green" },
-        { id: 4, name: "white" },
-        { id: 5, name: "saffron" },
-        { id: 6, name: "blue" },
-    ];
+    constructor(
+        private colorsSvc: ColorsService,
+    ) { }
+
 
     public get colorNames() {
         return this.colors.map((color) => color.name);
     }
 
     public addColor(newColor: string) {
-
-        const nextId = this.colors.reduce(
-            (maxId, nextColor) => Math.max(maxId, nextColor.id), 0 ) + 1;
-
-        this.colors = this.colors.concat({
-            id: nextId,
-            name: newColor,
-        });
+        this.colors = this.colorsSvc.append(newColor).getAll();
     }
 
 }
