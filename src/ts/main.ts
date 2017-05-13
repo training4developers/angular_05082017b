@@ -15,4 +15,4 @@ if (process.env["ENV"] === "production") {
 // bootstrap the specified module
 // defined in the module is a bootstrap option which
 // determines the top level component to be loaded
-platformBrowserDynamic().bootstrapModule(AppModule);
+// platformBrowserDynamic().bootstrapModule(AppModule);

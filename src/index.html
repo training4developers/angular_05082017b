@@ -9,5 +9,36 @@
   </head>
   <body>
     <main>Loading...</main>
+    <script>
+
+        var myWebSocket = new Promise( (resolve, reject) => {
+
+            var ws = new WebSocket("ws://localhost:3030");
+
+            ws.addEventListener("open", function() {
+
+                resolve(ws);
+            });
+
+        } );
+
+        myWebSocket.then( (ws) => {
+        
+            ws.send("some info");
+        });
+
+        async function doIt() {
+        
+            const g = await doSomeAsyncOp();
+
+            return g;
+
+        }
+
+        doIt();
+
+
+
+    </script>
   </body>
 </html>
